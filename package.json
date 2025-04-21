@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://Raf0707.github.io/raf_console_studio/",
+  "homepage": "https://Raf0707.github.io/raf_console_studio1/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

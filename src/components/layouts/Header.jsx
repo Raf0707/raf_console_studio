@@ -33,7 +33,7 @@ export default function Header() {
 
     if (pathname === '/') {
       // Главная страница
-      newPath = isRussian ? '/' : '/main_ru';
+      newPath = isRussian ? '/main' : '/main_ru';
     } else if (isRussian) {
       // Русская -> английская (удаляем _ru)
       newPath = pathname.replace('_ru', '');
@@ -94,14 +94,17 @@ export default function Header() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                        'text-sm font-medium transition-colors hover:text-primary',
-                        pathname === link.href ? 'text-primary' : 'text-foreground/60'
+                        'text-sm transition-colors hover:text-primary',
+                        pathname === link.href
+                            ? 'text-black font-bold' // Активная вкладка: черная и жирная
+                            : 'text-foreground/60 font-medium'
                     )}
                 >
                   {link.label}
                 </Link>
             ))}
           </nav>
+
 
           {/* Управление */}
           <div className="flex items-center gap-2">
@@ -119,8 +122,10 @@ export default function Header() {
                 size="icon"
                 onClick={toggleLanguage}
                 className="rounded-full"
+                aria-label={isRussian ? 'Switch to English' : 'Переключить на русский'}
             >
               <Globe className="h-4 w-4" />
+              <span className="sr-only">{isRussian ? 'EN' : 'RU'}</span>
             </Button>
 
             <Navbar navLinks={navLinks} />
