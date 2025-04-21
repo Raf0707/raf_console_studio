@@ -29,27 +29,28 @@ export default function Header() {
   };
 
   const toggleLanguage = () => {
-    // Определяем текущий язык по пути
-    const isRussian = pathname.includes('_ru');
+    let newPath;
 
-    // Получаем базовый путь без языкового суффикса
-    let basePath = pathname;
-    if (isRussian) {
-      basePath = pathname.replace('_ru', '');
-    } else if (pathname !== '/') {
-      // Для английской версии добавляем суффикс _ru
-      basePath = pathname + '_ru';
+    if (pathname === '/') {
+      // Главная страница
+      newPath = isRussian ? '/' : '/main_ru';
+    } else if (isRussian) {
+      // Русская -> английская (удаляем _ru)
+      newPath = pathname.replace('_ru', '');
     } else {
-      // Для главной страницы
-      basePath = '/ru';
+      // Английская -> русская (добавляем _ru перед последним слэшом или в конец)
+      const lastSlashIndex = pathname.lastIndexOf('/');
+      if (lastSlashIndex === pathname.length - 1) {
+        newPath = pathname.slice(0, -1) + '_ru/';
+      } else {
+        newPath = pathname + '_ru';
+      }
     }
 
-    // Перенаправляем на соответствующую версию
-    router.push(basePath);
+    router.push(newPath || '/');
   };
 
-  // Определяем текущий язык для отображения правильных ссылок
-  const isRussian = pathname.includes('_ru') || pathname === '/ru';
+  const isRussian = pathname.endsWith('_ru') || pathname.includes('_ru/');
 
   const navLinks = isRussian
       ? [
