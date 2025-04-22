@@ -17,6 +17,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_TELEGRAM_BOT_TOKEN: ${{ secrets.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN }}
+      NEXT_PUBLIC_TELEGRAM_CHAT_ID: ${{ secrets.NEXT_PUBLIC_TELEGRAM_CHAT_ID }}
+      NEXT_PUBLIC_TELEGRAM_BOT_TOKEN_WEB: ${{ secrets.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN_WEB }}
+      NEXT_PUBLIC_TELEGRAM_CHAT_ID_WEB: ${{ secrets.NEXT_PUBLIC_TELEGRAM_CHAT_ID_WEB }}
     steps:
       - uses: actions/checkout@v4
       
