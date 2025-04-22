@@ -1,12 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'export', // 💥 важно для GitHub Pages
-    images: {
-        unoptimized: true, // отключает Next Image optimization (требует сервер)
-    },
-    trailingSlash: true, // делает ссылки вида /about/ (иначе будет /about)
-    basePath: "/raf_console_studio1", // ⚠️ имя репозитория (без username)
+  output: 'export', // Важно для статического экспорта
+  basePath: '/raf_console_studio', // Указываем имя репозитория
+  trailingSlash: true, // Добавляет слеши к URL
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/main_ru',
+        permanent: true,
+      }
+    ]
+  }
+}
 
-};
-
-export default nextConfig;
+export default nextConfig
